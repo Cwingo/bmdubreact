@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bmdubreact/static/css/main.1ae45966.css",
+    "main.js": "/bmdubreact/static/js/main.5260ffa8.js",
+    "index.html": "/bmdubreact/index.html",
+    "main.1ae45966.css.map": "/bmdubreact/static/css/main.1ae45966.css.map",
+    "main.5260ffa8.js.map": "/bmdubreact/static/js/main.5260ffa8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ae45966.css",
+    "static/js/main.5260ffa8.js"
+  ]
+}
