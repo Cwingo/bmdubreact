@@ -1,0 +1,76 @@
+.page-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: #fff;
+}
+
+.page-wrap h1 {
+  font-size: clamp(1.5rem, 0.6vw + 1rem, 2rem);
+  font-weight: 600;
+  color: #fff;
+  display: inline-block;
+  border-left: 6px solid #a60c31;
+  padding-left: 0.75rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.page-wrap > p {
+  color: #bbb;
+  font-size: 1rem;
+  line-height: 1.4;
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+.submit-form {
+  background-color: #111;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 20px 40px rgba(0,0,0,.7);
+  padding: 1rem 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: .5rem;
+}
+
+.form-field label {
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: .5rem;
+  padding: .75rem 1rem;
+  color: #fff;
+  font-size: .9rem;
+  line-height: 1.4;
+}
+
+.form-field textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.fake-btn {
+  background-color: #a60c31;
+  color: #fff;
+  border: none;
+  border-radius: .5rem;
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: not-allowed;
+  opacity: .8;
+}

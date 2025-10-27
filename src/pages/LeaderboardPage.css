@@ -1,0 +1,248 @@
+/* overall page bg should be light under the hero, like your original */
+.leaderboard-page {
+  background-color: #f8f8f8;
+  color: #000;
+  min-height: 100vh;
+}
+
+/* HERO HEADER STRIP */
+.lb-hero {
+  position: relative;
+  background: radial-gradient(circle at 20% 20%, #1a1f2a 0%, #0f1116 60%);
+  color: #fff;
+  padding: 2rem 1rem 3rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.lb-hero-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.lb-bars {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+.lb-bar {
+  height: 4px;
+  border-radius: 2px;
+  width: 120px;
+}
+
+.lb-bar.red {
+  background: #a60c31;
+}
+
+.lb-bar.blue {
+  background: #1a56db;
+}
+
+.lb-title {
+  font-size: clamp(1.8rem, 0.6vw + 1rem, 2.25rem);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: .5rem;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.lb-subtitle {
+  color: #bfc5d6;
+  font-size: .9rem;
+  line-height: 1.4;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+/* subtle grid + blobs like your old banner */
+.lb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+  opacity: .3;
+  z-index: 1;
+}
+
+.lb-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.3;
+}
+
+.lb-blob-one {
+  width: 220px;
+  height: 220px;
+  right: 10%;
+  top: 20%;
+  background: rgba(166,12,49,0.6); /* red */
+}
+
+.lb-blob-two {
+  width: 140px;
+  height: 140px;
+  right: 25%;
+  top: 45%;
+  background: rgba(26,86,219,0.6); /* blue */
+}
+
+/* CONTENT AREA UNDER HERO */
+.lb-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* TABS */
+.lb-tabs {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.lb-tab {
+  background-color: #fff;
+  border: 1px solid #cfd3dc;
+  border-radius: .4rem;
+  font-size: .8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: .6rem .9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.lb-tab.active {
+  background-color: #1a56db;
+  border-color: #1a56db;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(26,86,219,.4);
+}
+
+/* TABLE WRAP */
+.lb-table-wrap {
+  background-color: #fff;
+  border: 1px solid #cfd3dc;
+  border-radius: .5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  overflow-x: auto;
+}
+
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+  font-size: .9rem;
+  color: #000;
+}
+
+.lb-table thead tr {
+  background-color: #efefef;
+  color: #000;
+  text-align: left;
+}
+
+.lb-table th {
+  font-weight: 600;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid #cfd3dc;
+  border-right: 1px solid #cfd3dc;
+  white-space: nowrap;
+  font-size: .8rem;
+  color: #000;
+}
+
+.lb-table th:last-child {
+  border-right: none;
+}
+
+.lb-table tbody tr {
+  background-color: #fff;
+}
+
+.lb-table tbody tr + tr td {
+  border-top: 1px solid #e3e6ef;
+}
+
+.lb-table td {
+  padding: .9rem 1rem;
+  font-size: .85rem;
+  color: #1a1a1a;
+  border-right: 1px solid #e3e6ef;
+  vertical-align: top;
+}
+
+.lb-table td:last-child {
+  border-right: none;
+}
+
+/* FEATURE CARD (spotlight top build) */
+.lb-feature-card {
+  background-color: #111;
+  border-radius: .75rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 20px 40px rgba(0,0,0,.8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  color: #fff;
+}
+
+.lb-feature-img {
+  width: 140px;
+  height: 90px;
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+  border-radius: .5rem;
+  flex-shrink: 0;
+}
+
+.lb-feature-body {
+  display: grid;
+  gap: .4rem;
+  min-width: 200px;
+}
+
+.lb-feature-rank-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.lb-feature-rank {
+  color: #a60c31;
+  font-weight: 600;
+}
+
+.lb-feature-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.lb-feature-details {
+  font-size: .8rem;
+  color: #bbb;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .lb-feature-img {
+    width: 100%;
+    max-width: 260px;
+    height: 150px;
+  }
+}
