@@ -1,145 +1,149 @@
-.page-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+.page-shell {
+  background-color: #000;
   color: #fff;
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  padding: 2rem 1.5rem 4rem;
 }
 
-h1 {
-  font-size: clamp(1.5rem, 0.6vw + 1rem, 2rem);
-  font-weight: 600;
-  border-left: 6px solid #a60c31;
-  padding-left: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.meta {
-  color: #bbb;
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-/* Filter / Sort */
-.filter-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+/* Title and Filters */
+.section-header {
+  max-width: 1100px;
+  margin: 0 auto;
   margin-bottom: 1rem;
 }
 
-.filter-chips {
+.section-title {
   display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.section-bar {
+  background-color: #a60c31;
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+
+.section-desc {
+  color: #bbb;
+  margin-top: 0.3rem;
+}
+
+.explore-filters-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.chips-row {
+  display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .chip {
-  background: #111;
+  background-color: #1b1b1b;
   color: #fff;
   border: 1px solid #333;
-  border-radius: 999px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.8rem;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.chip:hover,
 .chip.active {
-  background: #a60c31;
+  background-color: #a60c31;
   border-color: #a60c31;
 }
 
-.sort-select {
+.sort-wrap {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.sort-select label {
-  color: #bbb;
-  font-size: 0.9rem;
-}
-
-.sort-select select {
-  background: #fff;
-  color: #000;
-  border-radius: 10px;
+.sort-select {
+  border-radius: 8px;
   border: 1px solid #333;
-  padding: 0.5rem 0.75rem;
+  background-color: #000;
+  color: #fff;
+  padding: 0.4rem 0.6rem;
 }
 
-/* Build Grid */
+/* Build cards */
 .build-grid {
+  max-width: 1100px;
+  margin: 2rem auto 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-.card {
+.build-card {
   background-color: #111;
-  border-radius: 1rem;
+  border-radius: 16px;
   overflow: hidden;
-  display: grid;
-  gap: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-.card .img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+.build-card-img {
+  height: 180px;
   background-size: cover;
   background-position: center;
-  background-color: #000;
 }
 
-.body {
-  display: grid;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
+.build-card-body {
+  padding: 1rem;
 }
 
-.card-header {
+.build-card-toprow {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card h3 {
+.build-card-title {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.card strong {
+.build-card-whp {
   color: #a60c31;
 }
 
-.btn {
-  background: none;
-  color: #fff;
-  border: 1px solid #a60c31;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: 0.2s;
-  text-align: center;
+.build-card-meta {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin-top: 0.25rem;
 }
 
-.btn:hover,
-.btn.primary {
-  background: #a60c31;
-  border-color: #a60c31;
-}
-
-.pagination {
+.chip-row-tight {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.btn-view {
+  width: 100%;
+  padding: 0.6rem 0;
+  background-color: transparent;
+  border: 1px solid #a60c31;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background-color: #a60c31;
+  color: #fff;
 }
