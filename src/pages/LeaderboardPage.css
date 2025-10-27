@@ -1,107 +1,267 @@
-.leaderboard-shell {
+/* Whole page */
+.leaderboard-page {
   background-color: #000;
   color: #fff;
-  padding: 2rem 1.5rem 4rem;
   font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  /* we'll leave header at top and then hero right under */
 }
 
-.section-header {
-  max-width: 1100px;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-}
-
-.section-title {
-  display: flex;
-  align-items: center;
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.section-bar {
-  background-color: #a60c31;
-  width: 4px;
-  height: 24px;
-  margin-right: 10px;
-  border-radius: 2px;
-}
-
-.section-desc {
-  color: #bbb;
-  margin-top: 0.3rem;
-}
-
-/* top highlight card */
-.leader-topcard {
-  background-color: #111;
-  border-radius: 16px;
-  padding: 1rem;
-  max-width: 1100px;
-  margin: 0 auto 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-.leader-rank {
-  font-size: 1.3rem;
-  color: #a60c31;
-  font-weight: 700;
-}
-
-.leader-img {
-  width: 140px;
-  height: 90px;
+/* HERO STRIP AT TOP */
+.lb-hero {
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,0.06) 0%,
+      rgba(0,0,0,0) 70%
+    ),
+    #0d0f14;
   background-size: cover;
   background-position: center;
-  border-radius: 10px;
-  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 2rem 1.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.leader-info h3 {
-  font-size: 1rem;
+.lb-hero::after {
+  /* subtle bubbles / circles like your static screenshot */
+  content: "";
+  position: absolute;
+  right: -100px;
+  top: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(166,12,49,0.22) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(20px);
+  border-radius: 50%;
+}
+
+.lb-hero::before {
+  content: "";
+  position: absolute;
+  right: 60px;
+  bottom: -80px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(28,57,119,0.25) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(20px);
+  border-radius: 50%;
+}
+
+.lb-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.lb-hero-heading {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.lb-hero-lines {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.75rem;
+}
+
+.lb-line {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+.lb-line.blue {
+  background-color: #1a56db;
+  width: 60px;
+}
+.lb-line.red {
+  background-color: #a60c31;
+  width: 60px;
+}
+
+.lb-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.lb-sub {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* CONTENT WRAP BELOW HERO */
+.lb-content-wrap {
+  max-width: 1100px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.5rem;
+  color: #fff;
+}
+
+/* TABS */
+.lb-tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.lb-tab {
+  background-color: #1a56db;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.lb-tab:not(.active) {
+  background-color: #1b1b1b;
+  border: 1px solid #333;
+  color: #fff;
+}
+
+.lb-tab.active {
+  background-color: #1a56db;
+  border: 1px solid #1a56db;
+  color: #fff;
+}
+
+/* TABLE */
+.lb-table-wrap {
+  background-color: #0f0f0f;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+  overflow-x: auto;
+}
+
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+  font-size: 0.9rem;
+}
+
+.lb-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #d1d5db;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+}
+
+.lb-table tbody td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #fff;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.lb-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rank-col {
+  width: 50px;
+  font-weight: 600;
+  color: #a60c31;
+}
+
+.model-col {
+  font-weight: 600;
+  color: #fff;
+  min-width: 140px;
+}
+
+/* MEDIA BLOCK (OPTIONAL EXAMPLE CARD) */
+.lb-media-block {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.lb-media-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background-color: #111;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+  padding: 1rem;
+}
+
+.lb-media-fakeimg {
+  width: 180px;
+  height: 110px;
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.lb-media-label {
+  background-color: #a60c31;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.lb-media-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.lb-car-name {
   font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #fff;
 }
 
-.leader-info p {
-  font-size: 0.8rem;
-  color: #bbb;
+.lb-car-stats {
+  color: #9ca3af;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
 }
 
-/* grid of other builds */
-.leader-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  max-width: 1100px;
-  margin: 0 auto;
+.lb-car-notes {
+  color: #fff;
+  font-size: 0.75rem;
 }
 
-.leader-card {
-  background-color: #111;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(0,0,0,0.3);
-}
+@media (max-width: 600px) {
+  .lb-media-card {
+    flex-direction: column;
+  }
 
-.leader-thumb {
-  height: 160px;
-  background-size: cover;
-  background-position: center;
-}
-
-.leader-body {
-  padding: 1rem;
-}
-
-.leader-body h4 {
-  font-weight: 700;
-}
-
-.leader-body p {
-  color: #bbb;
-  font-size: 0.8rem;
-  margin-top: 0.3rem;
+  .lb-media-fakeimg {
+    width: 100%;
+    height: 140px;
+  }
 }
