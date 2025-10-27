@@ -1,18 +1,25 @@
 {
   "files": {
-    "main.css": "/bmdubreact/static/css/main.1ae45966.css",
-    "main.js": "/bmdubreact/static/js/main.ec27588a.js",
+    "main.css": "/bmdubreact/static/css/main.5a5b1a2e.css",
+    "main.js": "/bmdubreact/static/js/main.82f184a7.js",
+    "static/media/meabout.png": "/bmdubreact/static/media/meabout.2c7f553a7fcbe742b4b8.png",
     "static/media/hero.mp4": "/bmdubreact/static/media/hero.6344ab4a7fb9f5609507.mp4",
     "static/media/m53.png": "/bmdubreact/static/media/m53.264fd9b77be6eb0fd5d1.png",
     "static/media/540.png": "/bmdubreact/static/media/540.4efffc3358e4d7f437de.png",
     "static/media/m5.png": "/bmdubreact/static/media/m5.adef33ceb264533712dc.png",
+    "static/media/shiftknob.png": "/bmdubreact/static/media/shiftknob.f4f4f46eb6fb41ab95a4.png",
     "static/media/logo.png": "/bmdubreact/static/media/logo.d7400fa87a1772d83dc4.png",
+    "static/media/intercooler.png": "/bmdubreact/static/media/intercooler.722a0739d83285036919.png",
+    "static/media/coilover.png": "/bmdubreact/static/media/coilover.5f8da544a9d50815cbfe.png",
+    "static/media/downpipe.png": "/bmdubreact/static/media/downpipe.203b5f0ec3a4e77f8bc1.png",
+    "static/media/intake.png": "/bmdubreact/static/media/intake.91dd2d87ba6c7d955275.png",
+    "static/media/chargepipe.png": "/bmdubreact/static/media/chargepipe.d6382919e5885ee627bf.png",
     "index.html": "/bmdubreact/index.html",
-    "main.1ae45966.css.map": "/bmdubreact/static/css/main.1ae45966.css.map",
-    "main.ec27588a.js.map": "/bmdubreact/static/js/main.ec27588a.js.map"
+    "main.5a5b1a2e.css.map": "/bmdubreact/static/css/main.5a5b1a2e.css.map",
+    "main.82f184a7.js.map": "/bmdubreact/static/js/main.82f184a7.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ae45966.css",
-    "static/js/main.ec27588a.js"
+    "static/css/main.5a5b1a2e.css",
+    "static/js/main.82f184a7.js"
   ]
 }
