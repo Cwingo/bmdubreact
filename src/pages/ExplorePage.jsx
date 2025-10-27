@@ -1,109 +1,135 @@
 import "./ExplorePage.css";
 
-export default function ExplorePage() {
+import img540 from "../images/540.png";   
+import imgM5 from "../images/m5.png";     
+import imgM53 from "../images/m53.png";   
+function ExplorePage() {
   return (
-    <section className="page-wrap">
-      <h1>Explore Builds</h1>
-      <p className="meta">
-        Browse community builds. Open any card to view specs, parts, dyno numbers, and runs.
-      </p>
+    <main className="page-shell explore-shell">
+      <section className="section-header">
+        <h1 className="section-title">
+          <span className="section-bar" /> Explore Builds
+        </h1>
+        <p className="section-desc">
+          Browse community builds. Open any card to view specs, parts, dyno numbers,
+          and runs.
+        </p>
 
-      <div className="filter-section">
-        <div className="filter-chips">
-          <span className="chip active">All</span>
-          <span className="chip">B58</span>
-          <span className="chip">S55</span>
-          <span className="chip">S63</span>
-          <span className="chip">E85</span>
-          <span className="chip">93</span>
-          <span className="chip">Daily</span>
-          <span className="chip">Track</span>
+        <div className="explore-filters-row">
+          <div className="chips-row">
+            <span className="chip active">All</span>
+            <span className="chip">B58</span>
+            <span className="chip">S55</span>
+            <span className="chip">S63</span>
+            <span className="chip">E85</span>
+            <span className="chip">93</span>
+            <span className="chip">Daily</span>
+            <span className="chip">Track</span>
+          </div>
+
+          <div className="sort-wrap">
+            <label htmlFor="sort" className="sort-label">
+              Sort
+            </label>
+            <select id="sort" className="sort-select">
+              <option>Newest</option>
+              <option>Highest WHP</option>
+              <option>Fastest 60–130</option>
+            </select>
+          </div>
         </div>
+      </section>
 
-        <div className="sort-select">
-          <label htmlFor="sort">Sort</label>
-          <select id="sort">
-            <option>Newest</option>
-            <option>Highest WHP</option>
-            <option>Fastest 60–130</option>
-          </select>
-        </div>
-      </div>
+      <section className="build-grid">
+        {/* CARD 1 */}
+        <article className="build-card">
+          <div
+            className="build-card-img"
+            style={{
+              backgroundImage: `url(${img540})`,
+            }}
+          />
+          <div className="build-card-body">
+            <div className="build-card-toprow">
+              <h3 className="build-card-title">
+                G30 540i • E50 • Stage 2+
+              </h3>
+              <strong className="build-card-whp">585 whp</strong>
+            </div>
 
-      <div className="build-grid">
-        <article className="card">
-          <div className="img" style={{ backgroundImage: "url(/images/540.png)" }}></div>
-          <div className="body">
-            <div className="card-header">
-              <h3>G30 540i • E50 • Stage 2+</h3>
-              <strong>585 whp</strong>
+            <div className="build-card-meta">
+              B58 • xDrive • Pure800 • XHP
             </div>
-            <div className="meta">B58 • xDrive • Pure800 • XHP</div>
-            <div className="chips">
-              <span className="chip">E50</span>
-              <span className="chip">Daily</span>
+
+            <div className="chip-row-tight">
+              <span className="chip dark">E50</span>
+              <span className="chip dark">Daily</span>
             </div>
-            <a className="btn" href="#">View Build</a>
+
+            <button className="btn-view">View Build</button>
           </div>
         </article>
 
-        <article className="card">
-          <div className="img" style={{ backgroundImage: "url(/images/m5.png)" }}></div>
-          <div className="body">
-            <div className="card-header">
-              <h3>F90 M5 • E30 • Custom</h3>
-              <strong>710 whp</strong>
+        {/* CARD 2 */}
+        <article className="build-card">
+          <div
+            className="build-card-img"
+            style={{
+              backgroundImage: `url(${imgM5})`,
+            }}
+          />
+          <div className="build-card-body">
+            <div className="build-card-toprow">
+              <h3 className="build-card-title">
+                F90 M5 • E30 • Custom
+              </h3>
+              <strong className="build-card-whp">710 whp</strong>
             </div>
-            <div className="meta">S63 • AWD • Intakes • Downpipes</div>
-            <div className="chips">
-              <span className="chip">Drag</span>
-              <span className="chip">E30</span>
+
+            <div className="build-card-meta">
+              S63 • AWD • Intakes • Downpipes
             </div>
-            <a className="btn" href="#">View Build</a>
+
+            <div className="chip-row-tight">
+              <span className="chip dark">Drag</span>
+              <span className="chip dark">E30</span>
+            </div>
+
+            <button className="btn-view">View Build</button>
           </div>
         </article>
 
-        <article className="card">
-          <div className="img" style={{ backgroundImage: "url(/images/m53.png)" }}></div>
-          <div className="body">
-            <div className="card-header">
-              <h3>G80 M3 • E50 • OTS</h3>
-              <strong>580 whp</strong>
+        {/* CARD 3 */}
+        <article className="build-card">
+          <div
+            className="build-card-img"
+            style={{
+              backgroundImage: `url(${imgM53})`,
+            }}
+          />
+          <div className="build-card-body">
+            <div className="build-card-toprow">
+              <h3 className="build-card-title">
+                G80 M3 • E50 • OTS
+              </h3>
+              <strong className="build-card-whp">580 whp</strong>
             </div>
-            <div className="meta">S58 • xDrive • OTS Map</div>
-            <div className="chips">
-              <span className="chip">Street</span>
-              <span className="chip">E50</span>
+
+            <div className="build-card-meta">
+              S58 • xDrive • OTS Map
             </div>
-            <a className="btn" href="#">View Build</a>
+
+            <div className="chip-row-tight">
+              <span className="chip dark">Street</span>
+              <span className="chip dark">E50</span>
+            </div>
+
+            <button className="btn-view">View Build</button>
           </div>
         </article>
-
-        <article className="card">
-          <div className="img" style={{ backgroundImage: "url(/images/340.png)" }}></div>
-          <div className="body">
-            <div className="card-header">
-              <h3>G20 330i • 93 • Street</h3>
-              <strong>300 whp</strong>
-            </div>
-            <div className="meta">B48 • RWD • Tune • DP</div>
-            <div className="chips">
-              <span className="chip">93</span>
-              <span className="chip">Budget</span>
-            </div>
-            <a className="btn" href="#">View Build</a>
-          </div>
-        </article>
-      </div>
-
-      
-
-      <div className="pagination">
-        <a className="btn" href="#">Previous</a>
-        <a className="btn primary" href="#">1</a>
-        <a className="btn" href="#">2</a>
-        <a className="btn" href="#">Next</a>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
+
+export default ExplorePage;
