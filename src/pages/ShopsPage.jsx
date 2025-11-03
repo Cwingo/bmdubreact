@@ -1,4 +1,4 @@
-import "./ShopsPage.css";
+import "../styles/ShopsPage.css";
 
 export default function ShopsPage() {
   return (

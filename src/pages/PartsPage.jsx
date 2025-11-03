@@ -1,4 +1,4 @@
-import "./PartsPage.css";
+import "../styles/PartsPage.css";
 import downpipe from "../images/downpipe.png";
 import intercooler from "../images/intercooler.png";
 import coilover from "../images/coilover.png";

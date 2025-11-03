@@ -1,0 +1,56 @@
+/*  PAGE  */
+.leaderboard-page{background:#000;color:#fff;font-family:"Inter",system-ui,sans-serif;min-height:100vh}
+
+/*  CONTAINER  */
+.container{max-width:1120px;margin:0 auto;padding:0 18px}
+
+/*  HERO  */
+.lb-hero{background:radial-gradient(120% 140% at 10% 0%,rgba(28,105,212,.18),transparent 50%),
+                     radial-gradient(120% 140% at 90% 100%,rgba(228,0,43,.16),transparent 50%);}
+.lb-hero-inner{padding:32px 0 18px}
+.lb-hero-heading{display:flex;flex-direction:column;gap:8px}
+.lb-hero-lines{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.lb-line{display:block;height:4px;width:92px;border-radius:999px;opacity:.85}
+.lb-line.blue{background:#1c69d4}.lb-line.red{background:#e4002b}
+.lb-title{margin:0;font-size:1.6rem;font-weight:900;letter-spacing:.3px}
+.lb-sub{margin:0;color:#c7c7c7}
+
+/*  TABS  */
+.lb-content-wrap{padding:18px 0 40px}
+.lb-tabs{display:flex;gap:10px;margin-bottom:14px}
+.lb-tab{padding:8px 12px;border-radius:12px;border:1px solid #1e1e1f;background:#0f0f10;color:#eaeaea;cursor:pointer;font-weight:800}
+.lb-tab.active{border-color:#1c69d4;box-shadow:0 0 0 3px rgba(28,105,212,.22)}
+
+/*  TABLES  */
+.card{background:#0f0f10;border:1px solid #1e1e1f;border-radius:18px}
+.lb-table-wrap{overflow:hidden}
+.lb-table{width:100%;border-collapse:separate;border-spacing:0}
+.lb-table thead th{font-weight:800;text-align:left;padding:14px 16px;color:#dddddd;background:#121214}
+.lb-table tbody td{padding:14px 16px;border-top:1px solid #1e1e1f;color:#eaeaea}
+.rank-col{width:90px}
+.model-col{min-width:180px}
+
+/*  VIDEO  */
+.lb-video{margin-top:18px;padding:14px}
+.lb-video-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.lb-badge{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;border:1px solid #2a2a2b;background:#141416;font-weight:800;color:#f2a3b0}
+.lb-video-meta{display:flex;flex-direction:column;gap:2px}
+.lb-video-meta strong{font-weight:900}
+.lb-video-meta span{color:#c4c4c4}
+
+/* responsive 16:9 frame */
+.lb-video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid #1e1e1f;background:#000}
+.lb-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* notes */
+.lb-video-notes{margin:10px 2px 2px;color:#cfcfcf}
+
+/*  MEDIA BLOCK (legacy demo card if you keep it elsewhere)  */
+.lb-media-block{margin-top:18px}
+.lb-media-card{display:flex;gap:14px;padding:14px}
+.lb-media-fakeimg{flex:0 0 180px;height:120px;border-radius:14px;background:#131314;border:1px solid #1e1e1f;display:grid;place-items:center;color:#b7b7b7}
+.lb-media-label{font-weight:800;letter-spacing:.2px}
+.lb-media-text{display:flex;flex-direction:column;gap:4px}
+.lb-car-name{font-weight:900}
+.lb-car-stats{color:#c9c9c9}
+.lb-car-notes{color:#bdbdbd}

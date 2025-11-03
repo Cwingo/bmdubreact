@@ -1,9 +1,11 @@
-import "./AboutPage.css";
+import "../styles/AboutPage.css";
 import meabout from "../images/meabout.png";
+import ContactForm from "../components/ContactForm.jsx";
 
 function AboutPage() {
   return (
     <main className="page-shell about-shell">
+      {/* header */}
       <section className="section-header">
         <h1 className="section-title">
           <span className="section-bar" /> About
@@ -14,25 +16,24 @@ function AboutPage() {
         </p>
       </section>
 
+      {/* content */}
       <section className="about-content">
         <div className="about-text">
           <h2>Meet the Creator</h2>
           <p>
-            My name is Chris Wingo, a Computer Information Systems major at the
-            University of South Carolina. I built bmDub network to combine my
-            passion for cars and coding — helping enthusiasts share authentic
-            builds and shop recommendations.
-          </p>
-          <p>
-            I own a 2020 BMW 540i with a Stage 1 tune and various performance
-            upgrades, and I enjoy showcasing the community’s creativity through
-            this platform.
+            bmDub network is a student project prototype showing how a community
+            could share BMW builds, link parts, tag shops, and post real results.
           </p>
         </div>
 
         <div className="about-image">
           <img src={meabout} alt="Chris Wingo's BMW" />
         </div>
+      </section>
+
+      {/* contact form */}
+      <section className="about-form">
+        <ContactForm />
       </section>
     </main>
   );

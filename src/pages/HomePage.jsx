@@ -1,9 +1,9 @@
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 import heroVideo from "../images/hero.mp4";
 import img540 from "../images/540.png";
 import imgM5 from "../images/m5.png";
-import imgM53 from "../images/m53.png";
+import imgM53 from "../images/340.png";
 
 function HomePage() {
   return (

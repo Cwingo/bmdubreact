@@ -1,29 +1,29 @@
-import "./SubmitPage.css";
+// sections
+import SubmitBuildForm from "../components/SubmitBuildForm.jsx";
+import "../styles/SubmitBuildForm.css";
+import m340 from "../images/m340.png";
 
 export default function SubmitPage() {
   return (
-    <section className="page-wrap">
-      <h1>Submit Your Build</h1>
-      <p>Send in your car to get featured. This form will work in a later part.</p>
+    <main className="submit-shell">
+      {/* header */}
+      <section className="section-header">
+        <h1 className="section-title">
+          <span className="section-bar" /> Submit Your Build
+        </h1>
+        <p className="section-desc">Send in your car to get featured.</p>
+      </section>
 
-      <form className="submit-form">
-        <div className="form-field">
-          <label>Car / Model</label>
-          <input type="text" placeholder="2020 BMW 540i xDrive" />
-        </div>
+      {/* layout */}
+      <section className="submit-grid">
+        <SubmitBuildForm />
 
-        <div className="form-field">
-          <label>Instagram / @</label>
-          <input type="text" placeholder="@chris540" />
-        </div>
-
-        <div className="form-field">
-          <label>Mod list</label>
-          <textarea placeholder="Downpipe, tune, charge pipe, coilovers..."></textarea>
-        </div>
-
-        <button className="fake-btn" type="button">Submit Build</button>
-      </form>
-    </section>
+        <aside className="submit-aside">
+          <div className="aside-frame">
+            <img src={m340} alt="BMW M340 build" />
+          </div>
+        </aside>
+      </section>
+    </main>
   );
 }
