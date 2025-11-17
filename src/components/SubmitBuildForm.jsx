@@ -30,15 +30,14 @@ export default function SubmitBuildForm() {
       newErrors.mods = "Mod list must be 5–500 characters.";
     }
 
-    if (!image) {
-      newErrors.image = "Image URL is required.";
-    } else {
-      try {
-        new URL(image.trim());
-      } catch {
-        newErrors.image = "Image must be a valid URL.";
-      }
-    }
+
+if (image && image.trim() !== "") {
+  try {
+    new URL(image.trim());
+  } catch {
+    newErrors.image = "Image must be a valid URL.";
+  }
+}
 
     return newErrors;
   };
