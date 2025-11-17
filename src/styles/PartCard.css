@@ -1,51 +1,61 @@
 .part-card {
-    background-color: #111;
-    color: #fff;
-    border-radius: 1rem;
-    padding: 1rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,.7);
-    border: 1px solid rgba(255,255,255,.06);
-    display: grid;
-    gap: .75rem;
-  }
-  
-  .part-card__img {
-    width: 100%;
-    max-width: 220px;
-    background-color: #000;
-    border-radius: .75rem;
-    object-fit: contain;
-    aspect-ratio: 4 / 3;
-  }
-  
-  .part-card__body {
-    display: grid;
-    gap: .5rem;
-  }
-  
-  .part-card__title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.3;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-  }
-  
-  .part-card__badge {
-    background: #a60c31;
-    color: #fff;
-    font-size: .7rem;
-    font-weight: 500;
-    border-radius: .4rem;
-    padding: .25rem .5rem;
-    line-height: 1.2;
-  }
-  
-  .part-card__blurb {
-    color: #bbb;
-    font-size: .8rem;
-    line-height: 1.4;
-  }
-  
+  background: #0f0f10;
+  border: 1px solid #1d1d21;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.part-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+  border-color: #26262b;
+}
+
+/* image area */
+.part-card-img {
+  background: #0b0b0c;
+  aspect-ratio: 16 / 9;  /* keeps height controlled */
+  overflow: hidden;
+}
+.part-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* body */
+.part-card-body {
+  padding: 0.85rem 1rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.part-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.part-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #cfcfcf;
+}
+.part-meta .brand {
+  background: #151518;
+  border: 1px solid #23232a;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+}
+.part-meta .category {
+  color: #a1a1a6;
+}
+.part-price {
+  margin-top: 0.15rem;
+  font-weight: 700;
+  color: #e7e7e7;
+}

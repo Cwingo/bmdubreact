@@ -1,20 +1,23 @@
-import "./PartCard.css";
+import "../styles/PartCard.css";
 
-export default function PartCard(props) {
-  const { img, name, blurb, tag } = props;
+export default function PartCard({ part }) {
+  const { name, brand, price, image, category } = part || {};
 
   return (
     <article className="part-card">
-      <img src={img} alt={name} className="part-card__img" />
+      <div className="part-card-img">
+        <img src={image} alt={name || "Part"} loading="lazy" />
+      </div>
 
-      <div className="part-card__body">
-        <h2 className="part-card__title">
-          {name}
-          {tag && <span className="part-card__badge">{tag}</span>}
-        </h2>
-
-        <p className="part-card__blurb">{blurb}</p>
+      <div className="part-card-body">
+        <h3 className="part-title">{name}</h3>
+        <div className="part-meta">
+          {brand && <span className="brand">{brand}</span>}
+          {category && <span className="category">{category}</span>}
+        </div>
+        {price && <div className="part-price">{price}</div>}
       </div>
     </article>
   );
 }
+

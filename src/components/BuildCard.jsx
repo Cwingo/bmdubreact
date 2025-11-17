@@ -1,5 +1,4 @@
-// src/components/BuildCard.jsx
-import "./BuildCard.css";
+import "../styles/BuildCard.css";
 
 export default function BuildCard() {
   return (
