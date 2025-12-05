@@ -1,13 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import "../styles/ExplorePage.css";
 import BuildModal from "../components/BuildModal.jsx";
-import { API_BASE, fetchBuilds } from "../lib/api";
-
-function resolveImage(img) {
-  if (!img) return "";
-  if (img.startsWith("http")) return img;
-  return `${API_BASE}${img}`;
-}
+import { fetchBuilds } from "../lib/api";
 
 function ExplorePage() {
   const [open, setOpen] = useState(false);
@@ -23,7 +17,7 @@ function ExplorePage() {
     (async () => {
       try {
         const list = await fetchBuilds();
-        setBuilds(list);
+        setBuilds(list || []);
       } catch {
         setError("Could not load builds");
       } finally {
@@ -32,40 +26,34 @@ function ExplorePage() {
     })();
   }, []);
 
-  const curatedBuilds = useMemo(
-    () => builds.filter((b) => !String(b.id).startsWith("user-")),
-    [builds]
-  );
-
-  const recentSubmissions = useMemo(
-    () =>
-      builds
-        .filter((b) => String(b.id).startsWith("user-"))
-        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)),
-    [builds]
-  );
-
   const visible = useMemo(() => {
-    let list = curatedBuilds;
+    let list = [...builds];
 
-    if (tag !== "All") list = list.filter((b) => b.tags?.includes(tag));
+    if (tag !== "All") {
+      list = list.filter((b) => Array.isArray(b.tags) && b.tags.includes(tag));
+    }
 
     if (sortKey === "Highest WHP") {
-      list = [...list].sort((a, b) => (b.whp || 0) - (a.whp || 0)).reverse();
+      list.sort((a, b) => (Number(b.whp) || 0) - (Number(a.whp) || 0));
     } else if (sortKey === "Fastest 60–130") {
-      list = [...list].sort((a, b) => {
-        if (!a.sixty130) return 1;
-        if (!b.sixty130) return -1;
-        return a.sixty130 - b.sixty130;
-      });
+      const getVal = (x) =>
+        typeof x.sixty130 === "number"
+          ? x.sixty130
+          : Number(x.sixty130) || Number.POSITIVE_INFINITY;
+      list.sort((a, b) => getVal(a) - getVal(b));
     } else {
-      list = [...list].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
 
     return list;
-  }, [curatedBuilds, tag, sortKey]);
+  }, [builds, tag, sortKey]);
 
   const chipOptions = ["All", "B58", "S58", "S63", "93", "E50", "E30", "Track", "Daily"];
+
+  const handleOpen = (b) => {
+    setSelected(b);
+    setOpen(true);
+  };
 
   return (
     <main className="page-shell explore-shell">
@@ -113,79 +101,45 @@ function ExplorePage() {
       {error && <p className="error">{error}</p>}
 
       <section className="build-grid">
-        {visible.map((b) => (
-          <article className="build-card" key={b.id}>
-            <div
-              className="build-card-img"
-              style={{ backgroundImage: `url(${resolveImage(b.image)})` }}
-              role="button"
-              aria-label={`Open ${b.title}`}
-              onClick={() => {
-                setSelected(b);
-                setOpen(true);
-              }}
-            />
-            <div className="build-card-body">
-              <div className="build-card-toprow">
-                <h3 className="build-card-title">{b.title}</h3>
-                <strong className="build-card-whp">
-                  {b.whp ? `${b.whp} whp` : "— whp"}
-                </strong>
-              </div>
-              <div className="build-card-meta">{b.mods || b.meta}</div>
-              <div className="chip-row-tight">
-                {b.chips?.map((c) => (
-                  <span key={c} className="chip dark">
-                    {c}
-                  </span>
-                ))}
-              </div>
-              <button
-                className="btn-view"
-                onClick={() => {
-                  setSelected(b);
-                  setOpen(true);
-                }}
-              >
-                View Build
-              </button>
-            </div>
-          </article>
-        ))}
-      </section>
+        {visible.map((b) => {
+          const img =
+            b.image ||
+            (Array.isArray(b.images) && b.images.length > 0 ? b.images[0].src : "");
 
-      {recentSubmissions.length > 0 && (
-        <section className="recent-submissions">
-          <h2 className="section-subtitle">Recent Submissions</h2>
-          <p className="section-desc">
-            These are fresh builds submitted by the community.
-          </p>
-
-          <div className="build-grid">
-            {recentSubmissions.map((b) => (
-              <article className="build-card" key={b.id}>
-                {b.image && (
-                  <div
-                    className="build-card-img"
-                    style={{ backgroundImage: `url(${resolveImage(b.image)})` }}
-                  />
-                )}
-                <div className="build-card-body">
-                  <div className="build-card-toprow">
-                    <h3 className="build-card-title">{b.title || b.car}</h3>
-                  </div>
-                  <div className="build-card-meta">
-                    {b.instagram || b.user}
-                  </div>
-                  <p className="build-card-meta">
-                    {b.mods || b.meta}
-                  </p>
+          return (
+            <article className="build-card" key={b.id}>
+              {img && (
+                <img
+                  className="build-card-img"
+                  src={img}
+                  alt={b.title}
+                  onClick={() => handleOpen(b)}
+                />
+              )}
+              <div className="build-card-body">
+                <div className="build-card-toprow">
+                  <h3 className="build-card-title">{b.title}</h3>
+                  <strong className="build-card-whp">
+                    {Number(b.whp) > 0 ? `${b.whp} whp` : "— whp"}
+                  </strong>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
+                <div className="build-card-meta">{b.meta}</div>
+                <div className="chip-row-tight">
+                  {Array.isArray(b.chips) &&
+                    b.chips.map((c) => (
+                      <span key={c} className="chip dark">
+                        {c}
+                      </span>
+                    ))}
+                </div>
+                <button className="btn-view" onClick={() => handleOpen(b)}>
+                  View Build
+                </button>
+              </div>
+            </article>
+          );
+        })}
+      </section>
 
       <BuildModal open={open} build={selected} onClose={() => setOpen(false)} />
     </main>
