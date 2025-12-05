@@ -1,28 +1,29 @@
 import "../styles/BuildCard.css";
+import { API_BASE_URL } from "../lib/api";
 
-export default function BuildCard() {
+function resolveImage(img) {
+  if (!img) return "";
+  if (img.startsWith("http")) return img;
+  return `${API_BASE_URL}${img}`;
+}
+
+export default function BuildCard({ build, onClick }) {
+  const imgSrc = resolveImage(build.image);
+
   return (
-    <article className="build-card">
-      <img
-        className="build-card__img"
-        src="public/images/540.png"
-        alt="2020 BMW 540i Stage 1"
+    <article className="build-card" onClick={onClick}>
+      <div
+        className="build-card-img"
+        style={{ backgroundImage: `url(${imgSrc})` }}
       />
-
-      <div className="build-card__body">
-        <h2 className="build-card__title">
-          2020 BMW 540i <span className="build-card__badge">Stage 1 Tune</span>
-        </h2>
-
-        <ul className="build-card__stats">
-          <li><span className="label">Power:</span> 430whp</li>
-          <li><span className="label">0-60:</span> 3.9s</li>
-          <li><span className="label">Owner:</span> @chris540</li>
-        </ul>
-
-        <p className="build-card__mods">
-          Downpipe • Intake • Chargepipe • Custom burble
-        </p>
+      <div className="build-card-body">
+        <div className="build-card-toprow">
+          <h3 className="build-card-title">{build.title}</h3>
+          <strong className="build-card-whp">
+            {build.whp ? `${build.whp} whp` : "—"}
+          </strong>
+        </div>
+        <div className="build-card-meta">{build.meta}</div>
       </div>
     </article>
   );
