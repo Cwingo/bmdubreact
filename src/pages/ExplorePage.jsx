@@ -17,7 +17,7 @@ function ExplorePage() {
     (async () => {
       try {
         const list = await fetchBuilds();
-        setBuilds(list || []);
+        setBuilds(list);
       } catch {
         setError("Could not load builds");
       } finally {
@@ -26,34 +26,52 @@ function ExplorePage() {
     })();
   }, []);
 
+  const curatedBuilds = useMemo(
+    () => builds.filter((b) => !String(b.id).startsWith("user-")),
+    [builds]
+  );
+
+  const recentSubmissions = useMemo(
+    () =>
+      builds
+        .filter((b) => String(b.id).startsWith("user-"))
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)),
+    [builds]
+  );
+
   const visible = useMemo(() => {
-    let list = [...builds];
+    let list = curatedBuilds;
 
     if (tag !== "All") {
       list = list.filter((b) => Array.isArray(b.tags) && b.tags.includes(tag));
     }
 
     if (sortKey === "Highest WHP") {
-      list.sort((a, b) => (Number(b.whp) || 0) - (Number(a.whp) || 0));
+      list = [...list].sort((a, b) => (b.whp || 0) - (a.whp || 0));
     } else if (sortKey === "Fastest 60–130") {
-      const getVal = (x) =>
-        typeof x.sixty130 === "number"
-          ? x.sixty130
-          : Number(x.sixty130) || Number.POSITIVE_INFINITY;
-      list.sort((a, b) => getVal(a) - getVal(b));
+      list = [...list].sort((a, b) => {
+        const av = typeof a.sixty130 === "number" ? a.sixty130 : Infinity;
+        const bv = typeof b.sixty130 === "number" ? b.sixty130 : Infinity;
+        return av - bv;
+      });
     } else {
-      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      list = [...list].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
 
     return list;
-  }, [builds, tag, sortKey]);
+  }, [curatedBuilds, tag, sortKey]);
 
-  const chipOptions = ["All", "B58", "S58", "S63", "93", "E50", "E30", "Track", "Daily"];
-
-  const handleOpen = (b) => {
-    setSelected(b);
-    setOpen(true);
-  };
+  const chipOptions = [
+    "All",
+    "B58",
+    "S58",
+    "S63",
+    "93",
+    "E50",
+    "E30",
+    "Track",
+    "Daily",
+  ];
 
   return (
     <main className="page-shell explore-shell">
@@ -62,7 +80,8 @@ function ExplorePage() {
           <span className="section-bar" /> Explore Builds
         </h1>
         <p className="section-desc">
-          Browse community builds. Open any card to view specs, parts, dyno numbers, and runs.
+          Browse community builds. Open any card to view specs, parts, dyno
+          numbers, and runs.
         </p>
 
         <div className="explore-filters-row">
@@ -74,17 +93,14 @@ function ExplorePage() {
                 className={`chip ${tag === c ? "active" : ""}`}
                 onClick={() => setTag(c)}
               >
-                {c}
+                {c.toUpperCase()}
               </button>
             ))}
           </div>
 
           <div className="sort-wrap">
-            <label htmlFor="sort" className="sort-label">
-              Sort
-            </label>
+            <span className="sort-label">Sort</span>
             <select
-              id="sort"
               className="sort-select"
               value={sortKey}
               onChange={(e) => setSortKey(e.target.value)}
@@ -97,31 +113,34 @@ function ExplorePage() {
         </div>
       </section>
 
-      {loading && <p>Loading…</p>}
+      {loading && <p className="status-text">Loading…</p>}
       {error && <p className="error">{error}</p>}
 
       <section className="build-grid">
         {visible.map((b) => {
-          const img =
-            b.image ||
-            (Array.isArray(b.images) && b.images.length > 0 ? b.images[0].src : "");
+          const imgUrl = b.bg || "";
+
+          const whpLabel =
+            typeof b.whp === "number" && b.whp > 0 ? `${b.whp} whp` : "— whp";
 
           return (
             <article className="build-card" key={b.id}>
-              {img && (
-                <img
-                  className="build-card-img"
-                  src={img}
-                  alt={b.title}
-                  onClick={() => handleOpen(b)}
-                />
-              )}
+              <div
+                className="build-card-img"
+                style={{
+                  backgroundImage: imgUrl ? `url(${imgUrl})` : "none",
+                }}
+                role="button"
+                aria-label={`Open ${b.title}`}
+                onClick={() => {
+                  setSelected(b);
+                  setOpen(true);
+                }}
+              />
               <div className="build-card-body">
                 <div className="build-card-toprow">
                   <h3 className="build-card-title">{b.title}</h3>
-                  <strong className="build-card-whp">
-                    {Number(b.whp) > 0 ? `${b.whp} whp` : "— whp"}
-                  </strong>
+                  <strong className="build-card-whp">{whpLabel}</strong>
                 </div>
                 <div className="build-card-meta">{b.meta}</div>
                 <div className="chip-row-tight">
@@ -132,7 +151,13 @@ function ExplorePage() {
                       </span>
                     ))}
                 </div>
-                <button className="btn-view" onClick={() => handleOpen(b)}>
+                <button
+                  className="btn-view"
+                  onClick={() => {
+                    setSelected(b);
+                    setOpen(true);
+                  }}
+                >
                   View Build
                 </button>
               </div>
@@ -140,6 +165,41 @@ function ExplorePage() {
           );
         })}
       </section>
+
+      {recentSubmissions.length > 0 && (
+        <section className="recent-submissions">
+          <h2 className="section-subtitle">Recent Submissions</h2>
+          <p className="section-desc">
+            These are fresh builds submitted by the community.
+          </p>
+
+          <div className="build-grid">
+            {recentSubmissions.map((b) => {
+              const imgUrl = b.bg || "";
+
+              return (
+                <article className="build-card" key={b.id}>
+                  <div
+                    className="build-card-img"
+                    style={{
+                      backgroundImage: imgUrl ? `url(${imgUrl})` : "none",
+                    }}
+                  />
+                  <div className="build-card-body">
+                    <div className="build-card-toprow">
+                      <h3 className="build-card-title">{b.title || b.car}</h3>
+                    </div>
+                    <div className="build-card-meta">
+                      {b.user || b.instagram}
+                    </div>
+                    <p className="build-card-meta">{b.meta}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <BuildModal open={open} build={selected} onClose={() => setOpen(false)} />
     </main>

@@ -1,82 +1,77 @@
 import "../styles/BuildModal.css";
 
-function BuildModal({ open, build, onClose }) {
+function formatDate(ts) {
+  if (!ts) return "N/A";
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return "N/A";
+  return d.toLocaleDateString();
+}
+
+export default function BuildModal({ open, build, onClose }) {
   if (!open || !build) return null;
 
-  const mainImg =
-    build.image ||
-    (Array.isArray(build.images) && build.images.length > 0
-      ? build.images[0].src
-      : "");
+  const img =
+    (Array.isArray(build.images) && build.images[0]?.src) || build.bg || "";
 
-  const createdDate =
-    typeof build.createdAt === "number"
-      ? new Date(build.createdAt)
-      : build.createdAt instanceof Date
-      ? build.createdAt
-      : null;
+  const whpLabel =
+    typeof build.whp === "number" && build.whp > 0 ? build.whp : "N/A";
 
-  const createdLabel = createdDate
-    ? createdDate.toLocaleDateString(undefined, {
-        month: "numeric",
-        day: "numeric",
-        year: "numeric",
-      })
-    : "N/A";
+  const sixtyLabel =
+    typeof build.sixty130 === "number" && build.sixty130 > 0
+      ? build.sixty130
+      : "N/A";
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div
-        className="modal-shell"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <button className="modal-close" onClick={onClose}>
+    <div className="build-modal-overlay" onClick={onClose}>
+      <div className="build-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="build-modal-close" onClick={onClose}>
           ×
         </button>
 
-        {mainImg && <img className="modal-img" src={mainImg} alt={build.title} />}
+        {img && (
+          <img className="build-modal-image" src={img} alt={build.title} />
+        )}
 
-        <h2 className="modal-title">{build.title}</h2>
-        <p className="modal-sub">@{build.user || build.instagram}</p>
+        <div className="build-modal-content">
+          <header className="build-modal-header">
+            <h2 className="build-modal-title">{build.title}</h2>
+            <p className="build-modal-user">
+              {build.user || build.instagram}
+            </p>
+          </header>
 
-        <div className="modal-spec-row">
-          <div className="spec-block">
-            <span className="spec-label">WHP</span>
-            <span className="spec-value">
-              {typeof build.whp === "number" && build.whp > 0 ? build.whp : "N/A"}
-            </span>
-          </div>
-          <div className="spec-block">
-            <span className="spec-label">60–130</span>
-            <span className="spec-value">
-              {typeof build.sixty130 === "number" && build.sixty130 > 0
-                ? `${build.sixty130}s`
-                : "N/A"}
-            </span>
-          </div>
-          <div className="spec-block">
-            <span className="spec-label">Created</span>
-            <span className="spec-value">{createdLabel}</span>
-          </div>
-        </div>
-
-        <div className="modal-chips">
-          {Array.isArray(build.chips) &&
-            build.chips.map((c) => (
-              <span key={c} className="chip dark">
-                {c}
+          <div className="build-modal-stats">
+            <div className="stat">
+              <span className="stat-label">WHP</span>
+              <span className="stat-value">{whpLabel}</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">60–130</span>
+              <span className="stat-value">{sixtyLabel}</span>
+            </div>
+            <div className="stat">
+              <span className="stat-label">Created</span>
+              <span className="stat-value">
+                {formatDate(build.createdAt)}
               </span>
-            ))}
-        </div>
+            </div>
+          </div>
 
-        <h3 className="modal-subheading">Modifications</h3>
-        <p className="modal-text">{build.meta || build.mods}</p>
+          <div className="build-modal-chips">
+            {Array.isArray(build.chips) &&
+              build.chips.map((c) => (
+                <span key={c} className="chip dark">
+                  {c}
+                </span>
+              ))}
+          </div>
+
+          <section className="build-modal-section">
+            <h3 className="build-modal-subtitle">Modifications</h3>
+            <p className="build-modal-text">{build.meta || build.mods}</p>
+          </section>
+        </div>
       </div>
     </div>
   );
 }
-
-export default BuildModal;
-
